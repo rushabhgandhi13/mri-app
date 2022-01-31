@@ -13,4 +13,4 @@ def segment(request):
     return render(request, 'segmi/segment.html')
 
 def myreport(request):
-    return render(request, 'segmi/segment.html')
+    return render(request, 'segmi/myreport.html')
