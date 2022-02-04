@@ -11,6 +11,7 @@ urlpatterns = [
     path('lab/', views.labs, name='lab'),
     path('segment/', views.segment, name='segment'),
     path('myreport/', views.myreport, name='myreport'),
+    path('login/', views.login1, name='login1'),
 ]
 
 if settings.DEBUG:

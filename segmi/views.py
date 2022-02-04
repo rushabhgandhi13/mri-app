@@ -14,3 +14,6 @@ def segment(request):
 
 def myreport(request):
     return render(request, 'segmi/myreport.html')
+
+def login1(request):
+    return render(request, 'segmi/login.html')
