@@ -72,4 +72,31 @@ def profile(request):
 
 @login_required
 def myprofile(request):
-    return render(request, 'users/myprofile.html')
+    if request.user.profile.category=='Patient':
+        context ={
+            'category ': request.user.profile.category,
+            'user_details':request.user.profile.user_details,
+            'age ':request.user.profile.age,
+            'gender': request.user.profile.gender,
+            'disease': request.user.profile.disease,
+        }
+
+    elif request.user.profile.category=='Doctor':
+        context ={
+            'category ': request.user.profile.category,
+            'user_details':request.user.profile.user_details,
+            'license_number': request.user.profile.license_number,
+            'degree':request.user.profile.degree,
+            'age ':request.user.profile.age,
+        }
+
+    else:
+        context ={
+            'category ': request.user.profile.category,
+            'user_details':request.user.profile.user_details,
+            'license_number': request.user.profile.license_number,
+            'labname': request.user.profile.labname,
+            'labaddress': request.user.profile.labaddress,
+        }
+        
+    return render(request, 'users/myprofile.html',context)
