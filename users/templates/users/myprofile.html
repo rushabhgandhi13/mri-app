@@ -1,0 +1,14 @@
+{% extends "segmi/base.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+<div class="content-section">
+  <div class="container">
+  <div class="media">
+    <div class="media-body">
+      <h2 class="account-heading">{{ user.username }}</h2>
+      <p class="text-secondary">{{ user.email }}</p>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock body %}
