@@ -81,11 +81,17 @@
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-
+      {% if user.is_authenticated == False %}
       <a href="{% url 'login'%}" class="appointment-btn scrollto"><span class="d-none d-md-inline">Login</span> </a>
       <a href="{% url 'register'%}" class="appointment-btn scrollto"><span class="d-none d-md-inline">Register</span> </a>
       <a href="{% url 'logout'%}" class="appointment-btn scrollto"><span class="d-none d-md-inline">Logout</span> </a>
 
+      {% endif %}
+
+      {% if user.is_authenticated %}
+      <a href="{% url 'myprofile'%}" class="appointment-btn scrollto"><span class="d-none d-md-inline">Profile</span> </a>
+      {% endif %}
+      
     </div>
   </header><!-- End Header -->
   <br><br><br><br><br><br><br>
