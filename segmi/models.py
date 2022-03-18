@@ -1,4 +1,7 @@
+
 from django.db import models
+
+from users.models import Profile
 
 # Create your models here.
 class doctor(models.Model):
@@ -27,13 +30,14 @@ class lab(models.Model):
         return self.Name
 
 class lab_report(models.Model):
-    lab= models.ForeignKey(lab, default=0, on_delete=models.CASCADE)
-    patient = models.ForeignKey(patient, default="others", on_delete=models.CASCADE)
-    doctor = models.ForeignKey(doctor, default="others", on_delete=models.CASCADE)
+    lab= models.ForeignKey(Profile, on_delete=models.CASCADE , limit_choices_to={'category':'Lab_user'})
+    patient = models.ForeignKey(Profile, on_delete=models.CASCADE , limit_choices_to={'category':'Patient'},related_name='Patient')
+    doctor = models.ForeignKey(Profile, on_delete=models.CASCADE , limit_choices_to={'category':'Doctor'},related_name='Doctor')
     report_img = models.ImageField(upload_to='report_img/', default='default.png')
     segment_img = models.ImageField(upload_to='report_img/', default='default.png')
     report_summary = models.CharField(max_length=500)
     medicines = models.CharField(max_length=500)
     def __str__(self):
-        return self.patient.Name
+        return self.patient.user.username
+
 
