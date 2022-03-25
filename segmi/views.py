@@ -10,7 +10,7 @@ def home(request):
 
 def doctor(request):
     if request.method == 'POST':
-        form = ReportForm(request.POST)
+        form = ReportForm(request.POST,request.FILES)
         if form.is_valid() :
             form.save()
             messages.success(request, f'Report submitted successfully!')
@@ -22,18 +22,19 @@ def doctor(request):
 def doctor(request,id):
     rep = doctorReport.objects.get(id=id)
     if request.method == 'POST':
-        form = ReportForm(request.POST,instance=rep)
-        if form.is_valid() :
+        form = ReportForm(request.POST,request.FILES,instance=rep)
+        if form.is_valid():
+            
             form.save()
             messages.success(request, f'Report submitted successfully!')
-            return redirect('doctor')
+            return redirect('labreports')
     else:
         form = ReportForm(instance=rep)
     return render(request, 'segmi/doctorReport.html', {'form': form})
 
 def lab(request):
     if request.method == 'POST':
-        form = LabReportForm(request.POST)
+        form = LabReportForm(request.POST, request.FILES)
         if form.is_valid() :
             form.save()
             messages.success(request, f'Report submitted successfully!')
