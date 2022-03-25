@@ -25,4 +25,4 @@ class Profile(models.Model):
 	labname = models.CharField(max_length=500,default="None")
 	labaddress= models.CharField(max_length=500,default="None")
 	def __str__(self):
-		return f'{self.user.username} Profile '
+		return f'{self.user.username} '
