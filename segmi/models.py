@@ -1,4 +1,5 @@
 
+from email import message
 from django.db import models
 
 from users.models import Profile
@@ -39,5 +40,16 @@ class lab_report(models.Model):
     medicines = models.CharField(max_length=500)
     def __str__(self):
         return self.patient.user.username
+
+
+class appointment(models.Model):
+    #lab= models.ForeignKey(Profile, on_delete=models.CASCADE , limit_choices_to={'category':'Lab_user'})
+    #patient = models.ForeignKey(Profile, on_delete=models.CASCADE , limit_choices_to={'category':'Patient'},related_name='Patient')
+    #doctor = models.ForeignKey(Profile, on_delete=models.CASCADE , limit_choices_to={'category':'Doctor'},related_name='Doctor')
+    department = models.CharField(max_length=500)
+    doctor = models.CharField(max_length=500)
+    message = models.CharField(max_length=500)
+    date = models.DateField()
+    
 
 

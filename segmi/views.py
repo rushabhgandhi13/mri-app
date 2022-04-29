@@ -2,6 +2,8 @@ from django.shortcuts import redirect, render
 from django.contrib import messages
 from segmi.forms import *
 from .models import lab_report as doctorReport
+from django.views.decorators.csrf import csrf_exempt
+
 def home(request):
     context = {
         
@@ -54,4 +56,16 @@ def labreports(request):
 
 def myreport(request):
     return render(request, 'segmi/myreport.html')
+
+
+def appointment(request):
+    if request.method == 'POST':
+        form = AppointmentForm(request.POST)
+        if form.is_valid() :
+            form.save()
+            messages.success(request, f'Appointment booked successfully!')
+            return redirect('')
+    else:
+        form = AppointmentForm()
+    return render(request, 'segmi/index.html', {'form': form})
 
