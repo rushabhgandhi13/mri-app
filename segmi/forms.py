@@ -8,6 +8,13 @@ class ReportForm(forms.ModelForm):
 		model = lab_report
 		fields = '__all__'
 
+class LabReportsegmentForm(forms.ModelForm):
+	
+    class Meta:
+        model = lab_report
+        fields = ['segment_img']
+
+
 class LabReportForm(forms.ModelForm):
 	
     class Meta:

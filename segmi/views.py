@@ -1,10 +1,12 @@
 import numpy as np
 from django.shortcuts import redirect, render
 from django.contrib import messages
+from mriapp.settings import MEDIA_ROOT, MEDIA_URL
 from segmi.forms import *
 from .models import lab_report as doctorReport
 from django.views.decorators.csrf import csrf_exempt
 from segmi.utils import *
+
 set_seed(42)
 
 model = load_model()
@@ -60,16 +62,24 @@ def lab(request):
 
 def segment(request):
     if request.method == 'POST':
-        volume = request.FILES.get('date')
-        volume = np.load(volume, allow_pickle=True)
-        raw_input = np.asarray(volume).astype("float32")
-        output = predict(model, raw_input)
-        output_slice = argmax_output(output, slice_num=64)
-        plot_save_slice(raw_input, output_slice)
+        form = LabReportsegmentForm(request.POST, request.FILES,instance=doctorReport.objects.get(id=1))
+        if form.is_valid():
+            instance= form.save(commit= False)
+            volume = instance.segment_img
+            volume = np.load(volume, allow_pickle=False)
+            raw_input = np.asarray(volume).astype("float32")
+            output = predict(model, raw_input)
+            output_slice = argmax_output(output, slice_num=64)
+            plot_save_slice(raw_input, output_slice,path=os.path.join(MEDIA_ROOT,"test.png") )
+            instance.segment_img= "test.png"
+            instance.save()
+            messages.success(request, f'Segmentation done successfully!')
+            return redirect('segment')
+    else:
+        form = LabReportsegmentForm(request.POST, request.FILES,instance=doctorReport.objects.get(id=1))
 
-        messages.success(request, f'Segmentation done successfully!')
-        return redirect('segment')
-    return render(request, 'segmi/segment.html')
+        
+    return render(request, 'segmi/segment.html',{'form': form})
 
 
 def labreports(request):
