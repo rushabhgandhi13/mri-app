@@ -3,7 +3,7 @@ import numpy as np
 import random
 import tensorflow as tf
 import matplotlib.pyplot as plt
-from unet_model import unet3d
+from segmi.unet_model import unet3d
 
 
 def set_seed(SEED):
