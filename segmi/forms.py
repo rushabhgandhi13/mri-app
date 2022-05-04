@@ -6,7 +6,7 @@ from segmi.models import appointment, lab_report
 class ReportForm(forms.ModelForm):
 	class Meta:
 		model = lab_report
-		fields = '__all__'
+		fields = ['lab','patient','doctor','report_summary','medicines']
 
 class LabReportsegmentForm(forms.ModelForm):
 	

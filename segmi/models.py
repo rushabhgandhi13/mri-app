@@ -34,7 +34,7 @@ class lab_report(models.Model):
     lab= models.ForeignKey(Profile, on_delete=models.CASCADE , limit_choices_to={'category':'Lab_user'})
     patient = models.ForeignKey(Profile, on_delete=models.CASCADE , limit_choices_to={'category':'Patient'},related_name='Patient')
     doctor = models.ForeignKey(Profile, on_delete=models.CASCADE , limit_choices_to={'category':'Doctor'},related_name='Doctor')
-    report_img = models.ImageField(upload_to='report_img/', default='default.png')
+    report_img = models.FileField(upload_to='report_img/', default='default.png')
     segment_img = models.FileField(upload_to='report_img/', default='default.png')
     report_summary = models.CharField(max_length=500)
     medicines = models.CharField(max_length=500)
@@ -43,9 +43,6 @@ class lab_report(models.Model):
 
 
 class appointment(models.Model):
-    #lab= models.ForeignKey(Profile, on_delete=models.CASCADE , limit_choices_to={'category':'Lab_user'})
-    #patient = models.ForeignKey(Profile, on_delete=models.CASCADE , limit_choices_to={'category':'Patient'},related_name='Patient')
-    #doctor = models.ForeignKey(Profile, on_delete=models.CASCADE , limit_choices_to={'category':'Doctor'},related_name='Doctor')
     department = models.CharField(max_length=500)
     doctor = models.CharField(max_length=500)
     message = models.CharField(max_length=500)

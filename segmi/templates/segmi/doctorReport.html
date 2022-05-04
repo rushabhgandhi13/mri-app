@@ -63,8 +63,11 @@
               {{ form|crispy }}
           </fieldset>
           <br>
+          <h3>MRI Image</h3>
+          <img src="{{img.url}}" alt="Smiley face" >
+          <br>
           <div class="form-group">
-            <a class="btn btn-info btn" href="{% url 'segment' id %}" role="button">Segment report</a>
+            {% comment %} <a class="btn btn-info btn" href="{% url 'segment' id %}" role="button">Segment report</a> {% endcomment %}
               <button class="btn btn-outline-info" type="submit">Submit</button>
           </div>
       </form>
