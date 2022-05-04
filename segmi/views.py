@@ -45,7 +45,7 @@ def doctor(request, id):
             return redirect('labreports')
     else:
         form = ReportForm(instance=rep)
-    return render(request, 'segmi/doctorReport.html', {'form': form})
+    return render(request, 'segmi/doctorReport.html', {'form': form , 'id':id})
 
 
 def lab(request):
@@ -60,9 +60,9 @@ def lab(request):
     return render(request, 'segmi/lab.html', {'form': form})
 
 
-def segment(request):
+def segment(request,id):
     if request.method == 'POST':
-        form = LabReportsegmentForm(request.POST, request.FILES,instance=doctorReport.objects.get(id=1))
+        form = LabReportsegmentForm(request.POST, request.FILES,instance=doctorReport.objects.get(id=id))
         if form.is_valid():
             instance= form.save(commit= False)
             volume = instance.segment_img

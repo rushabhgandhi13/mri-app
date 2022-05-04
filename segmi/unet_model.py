@@ -1,9 +1,9 @@
-import tensorflow
+import os
 import tensorflow as tf
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Input, Conv3D, MaxPooling3D, concatenate, Conv3DTranspose, BatchNormalization, Dropout, Lambda
-import logging
-tf.get_logger().setLevel(logging.ERROR)
+
+
 
 kernel_initializer = 'he_uniform'  # Try others if you want
 
