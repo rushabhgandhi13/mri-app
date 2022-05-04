@@ -1,8 +1,10 @@
+
 import numpy as np
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from mriapp.settings import MEDIA_ROOT, MEDIA_URL
 from segmi.forms import *
+from users.models import Profile
 from .models import lab_report as doctorReport
 from django.views.decorators.csrf import csrf_exempt
 from segmi.utils import *
@@ -25,21 +27,27 @@ def home(request):
             return redirect(home)
     else:
         form = AppointmentForm()
+    
+    try:
+        prf= Profile.objects.get(user=request.user)
+        cat = prf.category
+        print("try")
+    except:
+        cat = 'None'
+    print('outside try')
+    return render(request, 'segmi/index.html', {'form':form, 'cat':cat})
 
 
-    return render(request, 'segmi/index.html', {'form':form})
-
-
-def doctor(request):
-    if request.method == 'POST':
-        form = ReportForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            messages.success(request, f'Report submitted successfully!')
-            return redirect('lab')
-    else:
-        form = ReportForm()
-    return render(request, 'segmi/doctorReport.html', {'form': form})
+# def doctor(request):
+#     if request.method == 'POST':
+#         form = ReportForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, f'Report submitted successfully!')
+#             return redirect('lab')
+#     else:
+#         form = ReportForm()
+#     return render(request, 'segmi/doctorReport.html', {'form': form})
 
 
 def doctor(request, id):
@@ -100,8 +108,11 @@ def lab(request):
 
 
 def labreports(request):
+
+    prf= Profile.objects.get(user=request.user)
+
     context = {
-        'report': lab_report.objects.all()
+        'report': lab_report.objects.filter(doctor=prf)
     }
     return render(request, 'segmi/labreports.html', context)
 
@@ -110,6 +121,3 @@ def myreport(request):
     return render(request, 'segmi/myreport.html')
 
 
-def appointment(request):
-   
-    return render(request, 'segmi/index.html', {'form': form})
