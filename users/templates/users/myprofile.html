@@ -12,16 +12,23 @@
         <h1 class="display-4">{{ user.username }}</h1>
         <div class="media">
           <div class="media-body">
-            {% comment %} <h2 class="account-heading"></h2> {% endcomment %}
-            <p class="text-secondary">{{ user.email }}</p>
-            <p class="text-secondary">{{ category }}</p>
-            <p class="text-secondary">{{ gender }}</p>
-            <p class="text-secondary">{{ user_details }}</p>
-            <p class="text-secondary">{{ degree}}</p>
-            <p class="text-secondary">{{ disease }}</p>
-            <p class="text-secondary">{{ labname }}</p>
-            <p class="text-secondary">{{ labaddress}}</p>
-            <p class="text-secondary">{{ license_number }}</p>
+            
+           
+            <div class="card-body col-9">
+                <h2 class="card-title my-3">{{ user.username }}</h2>
+                {% comment %} <h2 class="account-heading"></h2> {% endcomment %}
+                <p class="text-secondary">{{ user.email }}</p>
+                <p class="text-secondary">{{ category }}</p>
+                <p class="text-secondary">{{ gender }}</p>
+                <p class="text-secondary">{{ user_details }}</p>
+                <p class="text-secondary">{{ degree}}</p>
+                <p class="text-secondary">{{ disease }}</p>
+                <p class="text-secondary">{{ labname }}</p>
+                <p class="text-secondary">{{ labaddress}}</p>
+                <p class="text-secondary">{{ license_number }}</p>
+                
+            </div>
+            
           </div>
         </div>
       </div>
