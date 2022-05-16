@@ -1,3 +1,4 @@
+from dataclasses import fields
 from email import message
 from django import forms
 
@@ -30,3 +31,4 @@ class AppointmentForm(forms.ModelForm):
         widgets = {
             'date': forms.widgets.DateInput(attrs={'type': 'date'})
         }
+

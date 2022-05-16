@@ -1,37 +1,90 @@
 {% extends "segmi/base.html" %}
 {% load crispy_forms_tags %}
+{% load static %}
 {% block body %}
 
 
 
 <div class="content-section">
   <div class="container">
-
     <div class="jumbotron">
-      <div class="container">
-        <h1 class="display-4">{{ user.username }}</h1>
-        <div class="media">
-          <div class="media-body">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-2">
+              <img class="card-img-top " style="width: 150px; height: 125px;padding-left:20px" src="{% static 'assets/img/Profile/avatar.png' %}" alt="{{ user.username }}">
+            </div>
+            <div class = "col-6 ">
+              <h1 class="display-4"><b>{{ user.username }}</b></h1>
+            </div>
+          </div>
+          <div class="media">
+            <div class="media-body">
             
            
-            <div class="card-body col-9">
-                <h2 class="card-title my-3">{{ user.username }}</h2>
-                {% comment %} <h2 class="account-heading"></h2> {% endcomment %}
-                <p class="text-secondary">{{ user.email }}</p>
-                <p class="text-secondary">{{ category }}</p>
-                <p class="text-secondary">{{ gender }}</p>
-                <p class="text-secondary">{{ user_details }}</p>
-                <p class="text-secondary">{{ degree}}</p>
-                <p class="text-secondary">{{ disease }}</p>
-                <p class="text-secondary">{{ labname }}</p>
-                <p class="text-secondary">{{ labaddress}}</p>
-                <p class="text-secondary">{{ license_number }}</p>
+              <div class="card-body col-9">
+                  <h3 class="card-title my-3"style = "padding-top:40px,padding-bottom:20px"><br>Personal Details</h3>
+                  {% comment %} <h2 class="account-heading"></h2> {% endcomment %}
+                  {% if user.email %}
+                  <p class="text-secondary">Email : <b>{{ user.email }}</b></p>
+                  {% else %}
+                  <p class="text-secondary">{{ user.email }}</p>
+                  {% endif %}
+
+                  {% if user.profile.category %}
+                  <p class="text-secondary">Category : <b>{{ user.profile.category }}</b></p>
+                  {% else %}
+                  <p class="text-secondary">{{ category }}</p>
+                  {% endif %}
+
+                  {% if user.profile.gender %}
+                  <p class="text-secondary">Gender : <b>{{ user.profile.gender }}</b></p>
+                  {% else %}
+                  <p class="text-secondary">{{ gender }}</p>
+                  {% endif %}
+
+                  {% if user.profile.user_details %}
+                  <p class="text-secondary">User Details: <b>{{ user.profile.user_details }}</b></p>
+                  {% else %}
+                  <p class="text-secondary">{{ user_details }}</p>
+                  {% endif %}
+
+                  {% if user.profile.category == "Doctor" %}
+                  <p class="text-secondary">Degree : <b>{{ user.profile.degree }}</b></p>
+                  {% else %}
+                  <p class="text-secondary"></p>
+                  {% endif %}
+
+                  {% if user.profile.category == "Patient" %}
+                  <p class="text-secondary">Disease : <b>{{ user.profile.disease }}</b></p>
+                  {% else %}
+                  <p class="text-secondary">{{ disease }}</p>
+                  {% endif %}
+
+                  {% if user.profile.category == "Lab_user" %}
+                  <p class="text-secondary">labname : <b>{{ user.profile.labname }}</b></p>
+                  {% else %}
+                  <p class="text-secondary">{{ labname }}</p>
+                  {% endif %}
+
+                  {% if user.profile.category == "Lab_user" %}
+                  <p class="text-secondary">Address : <b>{{ user.profile.labaddress }}</b></p>
+                  {% else %}
+                  <p class="text-secondary">{{ labaddress }}</p>
+                  {% endif %}
+
+                  {% if user.profile.category != "Patient"  %}
+                  <p class="text-secondary">License number: <b>{{ user.profile.license_number }}</b></p>
+                  {% else %}
+                  <p class="text-secondary">{{ license_number }}</p>
+                  {% endif %}
+
                 
-            </div>
+              </div>
             
+            </div>
           </div>
         </div>
-      </div>
+      
     </div>
     <a href="{% url 'logout'%}" class="appointment-btn scrollto"><span class="d-none d-md-inline">Logout</span> </a>
 </div>

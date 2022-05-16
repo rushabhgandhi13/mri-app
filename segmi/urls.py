@@ -9,6 +9,7 @@ from django.http import HttpResponseRedirect, request
 urlpatterns = [
     path('', views.home, name='home'),
     path('doctor/<int:id>', views.doctor, name='doctor'),
+    path('report/<int:id>', views.patientReport, name='report'),
     path('lab/', views.lab, name='lab'),
     path('labreports/', views.labreports, name='labreports'),
     # path('segment/<int:id>', views.segment, name='segment'),

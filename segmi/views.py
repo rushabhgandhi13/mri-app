@@ -38,17 +38,6 @@ def home(request):
     return render(request, 'segmi/index.html', {'form':form, 'cat':cat})
 
 
-# def doctor(request):
-#     if request.method == 'POST':
-#         form = ReportForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request, f'Report submitted successfully!')
-#             return redirect('lab')
-#     else:
-#         form = ReportForm()
-#     return render(request, 'segmi/doctorReport.html', {'form': form})
-
 
 def doctor(request, id):
     rep = doctorReport.objects.get(id=id)
@@ -75,7 +64,7 @@ def lab(request):
             raw_input = np.asarray(volume).astype("float32")
             output = predict(model, raw_input)
             output_slice = argmax_output(output, slice_num=64)
-            plot_save_slice(raw_input, output_slice,path=os.path.join(MEDIA_ROOT,"test.png") )
+            plot_save_slice(raw_input, output_slice,path=os.path.join(MEDIA_ROOT,"test.png"),plot=False )
             instance.segment_img= "test.png"
             instance.save()
             messages.success(request, f'Report submitted successfully!')
@@ -85,26 +74,7 @@ def lab(request):
     return render(request, 'segmi/lab.html', {'form': form})
 
 
-# def segment(request,id):
-#     if request.method == 'POST':
-#         form = LabReportsegmentForm(request.POST, request.FILES,instance=doctorReport.objects.get(id=id))
-#         if form.is_valid():
-#             instance= form.save(commit= False)
-#             volume = instance.segment_img
-#             volume = np.load(volume, allow_pickle=False)
-#             raw_input = np.asarray(volume).astype("float32")
-#             output = predict(model, raw_input)
-#             output_slice = argmax_output(output, slice_num=64)
-#             plot_save_slice(raw_input, output_slice,path=os.path.join(MEDIA_ROOT,"test.png") )
-#             instance.segment_img= "test.png"
-#             instance.save()
-#             messages.success(request, f'Segmentation done successfully!')
-#             return redirect('segment')
-#     else:
-#         form = LabReportsegmentForm(request.POST, request.FILES,instance=doctorReport.objects.get(id=1))
 
-        
-#     return render(request, 'segmi/segment.html',{'form': form})
 
 
 def labreports(request):
@@ -118,6 +88,14 @@ def labreports(request):
 
 
 def myreport(request):
-    return render(request, 'segmi/myreport.html')
+    prf= Profile.objects.get(user=request.user)
+    context = {
+        'report': lab_report.objects.filter(patient=prf)
+    }
+    return render(request, 'segmi/myreport.html',context)
 
 
+def patientReport(request, id):
+    rep = doctorReport.objects.get(id=id)
+    prf= Profile.objects.get(user=request.user)
+    return render(request, 'segmi/patientReport.html', { 'id':id,'rep':rep,'prf':prf})

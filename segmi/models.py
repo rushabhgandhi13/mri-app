@@ -1,7 +1,8 @@
 
+import datetime
 from email import message
 from django.db import models
-
+from django.utils import timezone
 from users.models import Profile
 
 # Create your models here.
@@ -31,6 +32,7 @@ class lab(models.Model):
         return self.Name
 
 class lab_report(models.Model):
+    created_at = models.DateTimeField(default= timezone.now)
     lab= models.ForeignKey(Profile, on_delete=models.CASCADE , limit_choices_to={'category':'Lab_user'})
     patient = models.ForeignKey(Profile, on_delete=models.CASCADE , limit_choices_to={'category':'Patient'},related_name='Patient')
     doctor = models.ForeignKey(Profile, on_delete=models.CASCADE , limit_choices_to={'category':'Doctor'},related_name='Doctor')
@@ -47,6 +49,8 @@ class appointment(models.Model):
     doctor = models.CharField(max_length=500)
     message = models.CharField(max_length=500)
     date = models.DateField()
+
+
     
 
 
