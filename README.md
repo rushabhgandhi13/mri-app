@@ -70,7 +70,7 @@ python manage.py runserver
 
 ---
 <h4 align="center"><b>Developed with :heart: by 
-<a href="https://github.com/Patrickbro13">Pathik Ghugare</a> and <a href="https://github.com/Mayank7832">Mayank Chopra</a> and <a href="https://github.com/rushabhgandhi13">Rushabh Gandhi</a>  </b> , 
+<a href="https://github.com/Patrickbro13">Pathik Ghugare</a> and <a href="https://github.com/Mayank7832">Mayank Chopra</a> and <a href="https://github.com/rushabhgandhi13">Rushabh Gandhi</a>  </b> 
 </h4>
 
 ---
