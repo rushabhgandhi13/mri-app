@@ -114,7 +114,11 @@ Home
         <div class="text-center">
           <h3>In an emergency? <br> Need help?</h3>
           <p></p> 
+          {% if user.is_authenticated %}
           <a class="cta-btn scrollto" href="#appointment">Make an Make an Appointment</a>
+          {% else %}
+          <a class="cta-btn scrollto" href="{% url 'login'%}">Make an Make an Appointment</a>
+          {% endif %}
         </div>
 
       </div>
@@ -216,6 +220,7 @@ Home
     <!-- ======= Appointment Section ======= -->
     <section id="appointment" class="appointment section-bg">
       <div class="container">
+        {% if user.is_authenticated %}
         <form action="" method="POST" enctype="multipart/form-data">
           {% csrf_token %}
           <fieldset class="form-group">
@@ -230,6 +235,16 @@ Home
           </fieldset>
           <br>
       </form>
+      {% else %}
+      <fieldset class="form-group">
+        <div class="section-title">
+          <h2>Book appointment</h2>
+        </div>
+      <div class="container" style="width:25%">
+      <a href="{% url 'login'%}" class="btn btn-outline-info"><span class="d-none d-md-inline">Please Login to book an appointment.</a>
+      </div>
+      </fieldset>
+      {% endif %}
       </div>
      
     </section><!-- End Appointment Section -->
@@ -345,55 +360,55 @@ Home
         <ul class="faq-list">
 
           <li>
-            <div data-bs-toggle="collapse" class="collapsed question" href="#faq1">Non consectetur a erat nam at lectus urna duis? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div data-bs-toggle="collapse" class="collapsed question" href="#faq1">How long with the MRI exam take? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
             <div id="faq1" class="collapse" data-bs-parent=".faq-list">
               <p>
-                Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
+                A typical exam will usually last between 10 and 30 minutes. More involved exams can take about an hour. If you have any questions regarding the length of the exam, please do not hesitate to ask the MR technologist.
               </p>
             </div>
           </li>
 
           <li>
-            <div data-bs-toggle="collapse" href="#faq2" class="collapsed question">Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div data-bs-toggle="collapse" href="#faq2" class="collapsed question">Is there any radiation? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
             <div id="faq2" class="collapse" data-bs-parent=".faq-list">
               <p>
-                Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                MRI uses no radiation. The basic components of MRI are a strong magnetic field and a brief pulse of a radio frequency. There are no known side effects related to MRI. Since there is a strong magnetic field however, people with certain devices such as pacemakers, defibrillators, aneurysm clips and certain cochlear implants must NOT enter the MRI room.
               </p>
             </div>
           </li>
 
           <li>
-            <div data-bs-toggle="collapse" href="#faq3" class="collapsed question">Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div data-bs-toggle="collapse" href="#faq3" class="collapsed question">How long before my doctor gets the results? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
             <div id="faq3" class="collapse" data-bs-parent=".faq-list">
               <p>
-                Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
+                After the exam is completed, the images are sent to one of our radiologists, (doctors specializing in the evaluation of diagnostic images.) Once read, the radiologist will create a report that will be sent to your referring physician. The entire process usually takes 24-48 hours.
               </p>
             </div>
           </li>
 
           <li>
-            <div data-bs-toggle="collapse" href="#faq4" class="collapsed question">Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div data-bs-toggle="collapse" href="#faq4" class="collapsed question">Can I bring someone into the room with me? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
             <div id="faq4" class="collapse" data-bs-parent=".faq-list">
-              <p>
-                Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+              <p>         
+                Yes, though every person must be screened and cleared to enter the room. All metal must be removed from the body including hairpins, watches, jewelry, keys, and coins. Also, you will be asked to secure your wallet as credit cards and other forms of ID with magnetic strips may be erased.
               </p>
             </div>
           </li>
 
           <li>
-            <div data-bs-toggle="collapse" href="#faq5" class="collapsed question">Tempus quam pellentesque nec nam aliquam sem et tortor consequat? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div data-bs-toggle="collapse" href="#faq5" class="collapsed question">Can I listen to music during the exam? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
             <div id="faq5" class="collapse" data-bs-parent=".faq-list">
               <p>
-                Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in
+                This depends on the type of exam you are having. The body part that is being examined must be placed in the center of the tube. For example, for a foot study, the patient's foot would be positioned in the center of the magnet leaving most of the upper body outside. For this type of exam you could listen to the radio or choose from a list of various CD's we have compiled. On the other hand, a head scan requires that the patient's head rest in a special coil positioned in the middle of the magnet leaving no room for headphones.
               </p>
             </div>
           </li>
 
           <li>
-            <div data-bs-toggle="collapse" href="#faq6" class="collapsed question">Tortor vitae purus faucibus ornare. Varius vel pharetra vel turpis nunc eget lorem dolor? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div data-bs-toggle="collapse" href="#faq6" class="collapsed question">Will the MRI exam hurt? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
             <div id="faq6" class="collapse" data-bs-parent=".faq-list">
-              <p>
-                Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo integer malesuada nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc eget lorem dolor sed. Ut venenatis tellus in metus vulputate eu scelerisque. Pellentesque diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. Nibh tellus molestie nunc non blandit massa enim nec.
+              <p>               
+                The MRI exam itself should cause no pain however, because the patient is required to stay motionless for short periods of time, some discomfort may result. Occasionally patients may feel warmth in the area being scanned. If this becomes uncomfortable or extreme, the patient should inform the technologist immediately.
               </p>
             </div>
           </li>

@@ -31,10 +31,8 @@ def home(request):
     try:
         prf= Profile.objects.get(user=request.user)
         cat = prf.category
-        print("try")
     except:
         cat = 'None'
-    print('outside try')
     return render(request, 'segmi/index.html', {'form':form, 'cat':cat})
 
 
