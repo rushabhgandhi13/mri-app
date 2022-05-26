@@ -45,11 +45,13 @@ class lab_report(models.Model):
 
 
 class appointment(models.Model):
+    patient = models.ForeignKey(Profile, on_delete=models.CASCADE , default=0)
     department = models.CharField(max_length=500)
     doctor = models.CharField(max_length=500)
     message = models.CharField(max_length=500)
     date = models.DateField()
-
+    def __str__(self):
+        return self.patient.user.username
 
     
 

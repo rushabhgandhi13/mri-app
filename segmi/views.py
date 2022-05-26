@@ -22,7 +22,10 @@ def home(request):
     if request.method == 'POST':
         form = AppointmentForm(request.POST)
         if form.is_valid():
-            form.save()
+            I=form.save(commit=False)
+            prf= Profile.objects.get(user=request.user)
+            I.patient=prf
+            I.save()
             messages.success(request, f'Appointment booked successfully!')
             return redirect(home)
     else:
