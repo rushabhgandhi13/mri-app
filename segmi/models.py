@@ -40,6 +40,7 @@ class lab_report(models.Model):
     segment_img = models.FileField(upload_to='report_img/', default='default.png')
     report_summary = models.CharField(max_length=500)
     medicines = models.CharField(max_length=500)
+    Mark_as_seen=models.BooleanField(default=False)
     def __str__(self):
         return self.patient.user.username
 
@@ -50,6 +51,7 @@ class appointment(models.Model):
     doctor = models.CharField(max_length=500)
     message = models.CharField(max_length=500)
     date = models.DateField()
+    seen=models.BooleanField(default=False)
     def __str__(self):
         return self.patient.user.username
 

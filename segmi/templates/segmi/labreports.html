@@ -1,12 +1,36 @@
 {% extends 'segmi/base.html' %}
 {% load static %}
 {% block body %}
+<div class="container">
+<h1> <b> Unseen Reports </b></h1>
+<hr>
+</div>
 {% for report in report %}
 <div class="container">
+
 <div class="jumbotron">
     <h1 class="display-5">{{report.patient}}</h1>
     <p class="lead"></p>
-    <p>Doctor: {{report.doctor}} &nbsp&nbsp&nbsp Lab: {{report.lab}}</p>
+    <p>Doctor: {{report.doctor}} &nbsp&nbsp&nbsp Lab: {{report.lab}} &nbsp&nbsp&nbsp {{report.created_at}}</p>
+    <a class="btn btn-outline-info btn" href="{% url 'doctor' report.id %}" role="button">View report</a>
+  </div>
+</div>
+<div class="container">
+<hr>
+</div>
+
+{% endfor %}
+<div class="container">
+<h1><b>Seen Reports</b></h1>
+<hr>
+</div>
+{% for report in report_seen %}
+<div class="container">
+
+<div class="jumbotron">
+    <h1 class="display-5">{{report.patient}}</h1>
+    <p class="lead"></p>
+    <p>Doctor: {{report.doctor}} &nbsp&nbsp&nbsp Lab: {{report.lab}} &nbsp&nbsp&nbsp {{report.created_at}}</p>
     <a class="btn btn-outline-info btn" href="{% url 'doctor' report.id %}" role="button">View report</a>
   </div>
 </div>

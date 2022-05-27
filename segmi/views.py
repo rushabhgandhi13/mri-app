@@ -83,7 +83,8 @@ def labreports(request):
     prf= Profile.objects.get(user=request.user)
 
     context = {
-        'report': lab_report.objects.filter(doctor=prf)
+        'report': lab_report.objects.filter(doctor=prf,Mark_as_seen=False),
+        'report_seen': lab_report.objects.filter(doctor=prf,Mark_as_seen=True)
     }
     return render(request, 'segmi/labreports.html', context)
 
@@ -91,7 +92,7 @@ def labreports(request):
 def myreport(request):
     prf= Profile.objects.get(user=request.user)
     context = {
-        'report': lab_report.objects.filter(patient=prf)
+        'report': lab_report.objects.filter(patient=prf,Mark_as_seen=True)
     }
     return render(request, 'segmi/myreport.html',context)
 

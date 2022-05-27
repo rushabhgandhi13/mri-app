@@ -3,20 +3,24 @@
 {% block body %}
 
 
-
 {% for report in report %}
 <div class="container">
 <div class="jumbotron">
     <h1 class="display-5">{{report.patient}}</h1>
     <p class="lead"></p>
-    <p>Doctor: {{report.doctor}} &nbsp&nbsp&nbsp Lab: {{report.lab}}</p>
+    <p>Doctor: {{report.doctor}} &nbsp&nbsp&nbsp Lab: {{report.lab}} &nbsp&nbsp&nbsp {{report.created_at}}</p>
     <a class="btn btn-outline-info btn" href="{% url 'report' report.id %}" role="button">View report</a>
   </div>
 </div>
 <div class="container">
 <hr>
 </div>
-
+{% empty %}
+<div class="container">
+  <h3> No Reports found.</h3>
+  <br><br>
+</div>
+ 
 {% endfor %}
 
 
