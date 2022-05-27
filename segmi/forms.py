@@ -32,3 +32,8 @@ class AppointmentForm(forms.ModelForm):
             'date': forms.widgets.DateInput(attrs={'type': 'date'})
         }
 
+class Apform(forms.ModelForm):
+    class Meta:
+        model = appointment
+        fields ='__all__'
+        

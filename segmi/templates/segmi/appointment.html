@@ -1,0 +1,30 @@
+{% extends 'segmi/base.html' %}
+{% load crispy_forms_tags %}
+
+{% load static %}
+{% block body %}
+<section id="appointment" class="appointment section-bg">
+    <div class="container" data-aos="fade-up">
+
+     
+      <div class="container">
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <fieldset class="form-group">
+              <legend class="border-bottom mb-4">Appointment</legend>
+              {{ form|crispy }}
+          </fieldset>
+          <br>
+          
+          <div class="form-group">
+            
+              <button class="btn btn-outline-info" type="submit">Submit</button>
+          </div>
+      </form>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- End Appointment Section -->
+{% endblock body %}

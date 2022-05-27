@@ -9,10 +9,11 @@ from django.http import HttpResponseRedirect, request
 urlpatterns = [
     path('', views.home, name='home'),
     path('doctor/<int:id>', views.doctor, name='doctor'),
+    path('appointment/<int:id>', views.appointment, name='appointment'),
     path('report/<int:id>', views.patientReport, name='report'),
+    path('aplist/', views.aplist, name='aplist'),
     path('lab/', views.lab, name='lab'),
     path('labreports/', views.labreports, name='labreports'),
-    # path('segment/<int:id>', views.segment, name='segment'),
     path('myreport/', views.myreport, name='myreport'),
 ]
 

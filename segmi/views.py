@@ -6,6 +6,7 @@ from mriapp.settings import MEDIA_ROOT, MEDIA_URL
 from segmi.forms import *
 from users.models import Profile
 from .models import lab_report as doctorReport
+from .models import appointment as apl
 from django.views.decorators.csrf import csrf_exempt
 from segmi.utils import *
 
@@ -32,11 +33,15 @@ def home(request):
         form = AppointmentForm()
     
     try:
+        adm= False
         prf= Profile.objects.get(user=request.user)
         cat = prf.category
+        if(request.user.is_superuser):
+            adm = True
+       
     except:
         cat = 'None'
-    return render(request, 'segmi/index.html', {'form':form, 'cat':cat})
+    return render(request, 'segmi/index.html', {'form':form, 'cat':cat , 'adm':adm})
 
 
 
@@ -96,8 +101,30 @@ def myreport(request):
     }
     return render(request, 'segmi/myreport.html',context)
 
+def aplist(request):
+
+    context = {
+        'unseen': apl.objects.filter(seen=False),
+        'seen': apl.objects.filter(seen=True)
+    }
+    return render(request, 'segmi/aplist.html',context)
+
 
 def patientReport(request, id):
     rep = doctorReport.objects.get(id=id)
     prf= Profile.objects.get(user=request.user)
     return render(request, 'segmi/patientReport.html', { 'id':id,'rep':rep,'prf':prf})
+
+def appointment(request, id):
+    rep = apl.objects.get(id=id)
+    if request.method == 'POST':
+        form = Apform(request.POST, instance=rep)
+        if form.is_valid():
+
+            form.save()
+            messages.success(request, f'Report submitted successfully!')
+            return redirect('aplist')
+    else:
+        form = Apform(instance=rep)
+
+    return render(request, 'segmi/appointment.html', { 'id':id,'rep':rep,'form': form})
