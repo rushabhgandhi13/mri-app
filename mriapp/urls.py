@@ -19,7 +19,8 @@ from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
 from users import views as user_views
-
+admin.site.site_header = 'Neurocare Admin Panel'
+admin.site.site_title = 'Neurocare'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', user_views.register, name='register'),
