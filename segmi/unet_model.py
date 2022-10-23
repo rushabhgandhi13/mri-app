@@ -10,6 +10,9 @@ kernel_initializer = 'he_uniform'  # Try others if you want
 
 def unet3d(IMG_HEIGHT, IMG_WIDTH, IMG_DEPTH, IMG_CHANNELS, num_classes, kernel_initializer=kernel_initializer):
     inputs = Input((IMG_HEIGHT, IMG_WIDTH, IMG_DEPTH, IMG_CHANNELS))
+    """
+    Returns a 3D UNET model
+    """
     # s = Lambda(lambda x: x / 255)(inputs)   #No need for this if we normalize our inputs beforehand
     s = inputs
 
