@@ -50,7 +50,7 @@ Install all the reqirements -
  Run the following commands -
 
 ```
-python manage.py runserver
+ $ python manage.py runserver
 ```
 
 ---
